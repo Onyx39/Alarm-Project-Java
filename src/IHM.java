@@ -23,6 +23,7 @@ public class IHM extends JFrame {
         liste_capteurs_radiation_IHM = uneRadiationListe;
         //this.text = new JTextField("Ceci est la fenetre de gestion des alarmes");
         //this.pan.add(this.text, BorderLayout.CENTER);
+        this.setTitle("Appliction de gestion des alarmes");
         this.bouton_validation_feu = new JButton ("Bouton validation de l'alarme feu");
         this.bouton_validation_gaz = new JButton ("Bouton validation de l'alarme gaz");
         this.bouton_validation_radiation = new JButton ("Bouton validation de l'alarme radiation");
