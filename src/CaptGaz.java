@@ -1,6 +1,6 @@
 import java.time.*;
 
-class CaptGaz extends Capteur {
+public class CaptGaz extends Capteur {
 
     public CaptGaz (int unId, String unNom, String unLieu) {
         super(unId, unNom, unLieu);

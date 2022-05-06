@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-class Capteur {
+public class Capteur {
 
     int id;
     String nom, lieu;

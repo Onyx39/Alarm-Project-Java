@@ -1,6 +1,6 @@
-import java.time.*;
+//import java.time.*;
 
-class Main {
+public class Main {
 
     public static void main(String[] args) {
         
@@ -20,11 +20,13 @@ class Main {
         cr.addListener(monoA);
         cr.addListener(monoB);
 
-        cg.createEvent(LocalDate.of(2022, 5, 6), "Polytech", 1, "CO2");
-        ci.createEvent(LocalDate.of(2022, 5, 6), "Mairie", 1);
-        cr.createEvent(LocalDate.of(2022, 5, 6), "Polytech", 1, 50);
-    }
+        //cg.createEvent(LocalDate.of(2022, 5, 6), "Polytech", 1, "CO2");
+        //ci.createEvent(LocalDate.of(2022, 5, 6), "Mairie", 1);
+        //cr.createEvent(LocalDate.of(2022, 5, 6), "Polytech", 1, 50);
 
+
+        IHM MyIHM = new IHM();
+    }
 
 }
 

@@ -1,4 +1,4 @@
-class MoniteurB implements Listener {
+public class MoniteurB implements Listener {
 
     String nom;
 

@@ -1,6 +1,6 @@
 import java.time.*;
 
-class CaptRadiation extends Capteur {
+public class CaptRadiation extends Capteur {
 
     public CaptRadiation (int unId, String unNom, String unLieu) {
         super(unId, unNom, unLieu);

@@ -1,6 +1,6 @@
 import java.time.*;
 
-class AnomalieEvent {
+public class AnomalieEvent {
 
     LocalDate date;
     String lieu;

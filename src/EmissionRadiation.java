@@ -1,6 +1,6 @@
 import java.time.*;
 
-class EmissionRadiation extends AnomalieEvent {
+public class EmissionRadiation extends AnomalieEvent {
 
     public int niveau_radiation;
 
