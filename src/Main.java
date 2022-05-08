@@ -32,7 +32,8 @@ public class Main {
         //cr.createEvent(LocalDate.of(2022, 5, 6), "Polytech", 1, 50);
 
 
-        IHM MyIHM = new IHM(liste_mono, liste_capteur_feu, liste_capteur_gaz, liste_capteur_radiation);
+        //IHM MyIHM = new IHM(liste_mono, liste_capteur_feu, liste_capteur_gaz, liste_capteur_radiation);
+        IHM2 myIHM = new IHM2 (liste_mono, liste_capteur_feu, liste_capteur_gaz, liste_capteur_radiation);
     }
 
 }
