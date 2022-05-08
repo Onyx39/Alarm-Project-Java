@@ -4,9 +4,9 @@ public class AnomalieEvent {
 
     LocalDate date;
     String lieu;
-    int importance;
+    Integer importance;
 
-    public AnomalieEvent (LocalDate uneDate, String unLieu, int uneImportance) {
+    public AnomalieEvent (LocalDate uneDate, String unLieu, Integer uneImportance) {
         date = uneDate;
         lieu = unLieu;
         importance = uneImportance;
@@ -23,7 +23,7 @@ public class AnomalieEvent {
         this.lieu = newLieu;
     }
 
-    public void setImportance (int newImportance) {
+    public void setImportance (Integer newImportance) {
         this.importance = newImportance;
     }
 
@@ -39,7 +39,7 @@ public class AnomalieEvent {
         return this.lieu;
     }
 
-    public int getImportance (){
+    public Integer getImportance (){
         return this.importance;
     }
 

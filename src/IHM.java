@@ -11,13 +11,15 @@ public class IHM extends JFrame {
     private JButton bouton_validation_feu;
     private JButton bouton_validation_gaz;
     private JButton bouton_validation_radiation;
-    public ArrayList<Listener> liste_ecouteurs_IHM;
+    public ArrayList<ListenerA> liste_ecouteursA_IHM;
+    public ArrayList<ListenerB> liste_ecouteursB_IHM;
     public ArrayList<CaptIncendie> liste_capteurs_feu_IHM;
     public ArrayList<CaptGaz> liste_capteurs_gaz_IHM;
     public ArrayList<CaptRadiation> liste_capteurs_radiation_IHM;
 
-    public IHM (ArrayList<Listener> uneMonoListe, ArrayList<CaptIncendie> uneFeuListe, ArrayList<CaptGaz> uneGazListe, ArrayList<CaptRadiation> uneRadiationListe) {
-        liste_ecouteurs_IHM = uneMonoListe;
+    public IHM (ArrayList<ListenerA> uneMonoListeA, ArrayList<ListenerB> uneMonoListeB, ArrayList<CaptIncendie> uneFeuListe, ArrayList<CaptGaz> uneGazListe, ArrayList<CaptRadiation> uneRadiationListe) {
+        liste_ecouteursA_IHM = uneMonoListeA;
+        liste_ecouteursB_IHM = uneMonoListeB;
         liste_capteurs_feu_IHM = uneFeuListe;
         liste_capteurs_gaz_IHM = uneGazListe;
         liste_capteurs_radiation_IHM = uneRadiationListe;
@@ -29,20 +31,26 @@ public class IHM extends JFrame {
         this.bouton_validation_radiation = new JButton ("Bouton validation de l'alarme radiation");
 
         for (int i = 0; i < liste_capteurs_feu_IHM.size(); i++) {
-            for (int j = 0; j < liste_ecouteurs_IHM.size(); j++) {
-                liste_capteurs_feu_IHM.get(i).addListener(liste_ecouteurs_IHM.get(j));
+            for (int j = 0; j < liste_ecouteursA_IHM.size(); j++) {
+                liste_capteurs_feu_IHM.get(i).addListenerA(liste_ecouteursA_IHM.get(j));
             }
         }
 
         for (int i = 0; i < liste_capteurs_gaz_IHM.size(); i++) {
-            for (int j = 0; j < liste_ecouteurs_IHM.size(); j++) {
-                liste_capteurs_gaz_IHM.get(i).addListener(liste_ecouteurs_IHM.get(j));
+            for (int j = 0; j < liste_ecouteursA_IHM.size(); j++) {
+                liste_capteurs_gaz_IHM.get(i).addListenerA(liste_ecouteursA_IHM.get(j));
+            }
+        }
+
+        for (int i = 0; i < liste_capteurs_gaz_IHM.size(); i++) {
+            for (int j = 0; j < liste_ecouteursB_IHM.size(); j++) {
+                liste_capteurs_gaz_IHM.get(i).addListenerB(liste_ecouteursB_IHM.get(j));
             }
         }
 
         for (int i = 0; i < liste_capteurs_radiation_IHM.size(); i++) {
-            for (int j = 0; j < liste_ecouteurs_IHM.size(); j++) {
-                liste_capteurs_radiation_IHM.get(i).addListener(liste_ecouteurs_IHM.get(j));
+            for (int j = 0; j < liste_ecouteursB_IHM.size(); j++) {
+                liste_capteurs_radiation_IHM.get(i).addListenerB(liste_ecouteursB_IHM.get(j));
             }
         }
 

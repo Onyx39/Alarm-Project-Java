@@ -4,7 +4,7 @@ public class EmissionGaz extends AnomalieEvent {
 
     String type;
 
-    public EmissionGaz(LocalDate uneDate, String unLieu, int uneImportance, String unType) {
+    public EmissionGaz(LocalDate uneDate, String unLieu, Integer uneImportance, String unType) {
         super(uneDate, unLieu, uneImportance);
         this.type = unType;
     }

@@ -1,4 +1,4 @@
-public class MoniteurB implements Listener {
+public class MoniteurB implements ListenerB {
 
     String nom;
 
@@ -7,13 +7,17 @@ public class MoniteurB implements Listener {
     }
 
     @Override
-    public void onEvent(AnomalieEvent e) {
-        if (e.getClass().getSimpleName() == "EmissionGaz") {
-            System.out.println("Moniteur B : Alerte gaz");
+    public void onEvent(EmissionGaz e) {
+        String res = "Moniteur B : Alerte au gaz (" + e.type + ") de niveau " + e.importance.toString();
+        res += " au bâtiment " + e.lieu + " le " + e.date;
+        System.out.println(res);
         }
-        else if (e.getClass().getSimpleName() == "EmissionRadiation") {
-            System.out.println("Moniteur B: Alerte radiation");
-        }
+    
+    @Override
+    public void onEvent(EmissionRadiation e) {
+        String res = "Moniteur B : Alerte au radiation (" + e.niveau_radiation.toString() + ") de niveau " + e.importance.toString();
+        res += " au bâtiment " + e.lieu + " le " + e.date;
+        System.out.println(res);
     }
 
 //Setters 

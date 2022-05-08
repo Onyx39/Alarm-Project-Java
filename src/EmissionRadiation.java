@@ -2,9 +2,9 @@ import java.time.*;
 
 public class EmissionRadiation extends AnomalieEvent {
 
-    public int niveau_radiation;
+    public Integer niveau_radiation;
 
-    public EmissionRadiation(LocalDate uneDate, String unLieu, int uneImportance, int unNiveauRadiation) {
+    public EmissionRadiation(LocalDate uneDate, String unLieu, Integer uneImportance, Integer unNiveauRadiation) {
         super(uneDate, unLieu, uneImportance);
         this.niveau_radiation = uneImportance;
         this.niveau_radiation = unNiveauRadiation;

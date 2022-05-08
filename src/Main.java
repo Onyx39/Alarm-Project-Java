@@ -11,9 +11,10 @@ public class Main {
         MoniteurA monoA = new MoniteurA("monoA");
         MoniteurB monoB = new MoniteurB("monoB");
 
-        ArrayList<Listener> liste_mono = new ArrayList<Listener>();
-        liste_mono.add(monoA);
-        liste_mono.add(monoB);
+        ArrayList<ListenerA> liste_mono_A = new ArrayList<ListenerA>();
+        ArrayList<ListenerB> liste_mono_B = new ArrayList<ListenerB>();
+        liste_mono_A.add(monoA);
+        liste_mono_B.add(monoB);
 
         CaptGaz cg = new CaptGaz(1, "Bidule", "Polytech");
         CaptIncendie ci = new CaptIncendie(1, "Alarme incendie", "Mairie");
@@ -32,8 +33,8 @@ public class Main {
         //cr.createEvent(LocalDate.of(2022, 5, 6), "Polytech", 1, 50);
 
 
-        //IHM MyIHM = new IHM(liste_mono, liste_capteur_feu, liste_capteur_gaz, liste_capteur_radiation);
-        IHM2 myIHM = new IHM2 (liste_mono, liste_capteur_feu, liste_capteur_gaz, liste_capteur_radiation);
+        //IHM MyIHM = new IHM(liste_mono_A, liste_mono_B, liste_capteur_feu, liste_capteur_gaz, liste_capteur_radiation);
+        IHM2 myIHM = new IHM2 (liste_mono_A, liste_mono_B, liste_capteur_feu, liste_capteur_gaz, liste_capteur_radiation);
     }
 
 }

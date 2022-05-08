@@ -1,7 +1,5 @@
-//import java.util.ArrayList;
-
 public interface Listener {
 
-    public void onEvent (AnomalieEvent e);
+    public void onEvent (EmissionGaz e);
     
 }
