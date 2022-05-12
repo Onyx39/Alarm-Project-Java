@@ -34,7 +34,7 @@ public class Main {
 
 
         //IHM MyIHM = new IHM(liste_mono_A, liste_mono_B, liste_capteur_feu, liste_capteur_gaz, liste_capteur_radiation);
-        IHM2 myIHM = new IHM2 (liste_mono_A, liste_mono_B, liste_capteur_feu, liste_capteur_gaz, liste_capteur_radiation);
+        IHMGenerationAlarme myIHM = new IHMGenerationAlarme(liste_mono_A, liste_mono_B, liste_capteur_feu, liste_capteur_gaz, liste_capteur_radiation);
     }
 
 }
