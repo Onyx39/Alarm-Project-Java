@@ -2,7 +2,7 @@ import java.time.*;
 
 public class CaptGaz extends Capteur {
 
-    public CaptGaz (Integer unId, String unNom, String unLieu) {
+    public CaptGaz (Integer unId, String unNom, Batiment unLieu) {
         super(unId, unNom, unLieu);
     }
 

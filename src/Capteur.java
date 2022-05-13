@@ -1,14 +1,14 @@
-//import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Capteur {
 
     Integer id;
-    String nom, lieu;
+    String nom;
+    Batiment lieu;
     ArrayList<ListenerA> liste_ecouteurs_typeA;
     ArrayList<ListenerB> liste_ecouteurs_typeB;
 
-    public Capteur (Integer unId, String unNom, String unLieu) {
+    public Capteur (Integer unId, String unNom, Batiment unLieu) {
         id = unId;
         nom = unNom;
         lieu = unLieu;
@@ -50,7 +50,7 @@ public class Capteur {
         nom = newNom;
     }
 
-    public void setLieu(String newLieu) {
+    public void setLieu(Batiment newLieu) {
         lieu = newLieu;
     }
 
@@ -64,7 +64,7 @@ public class Capteur {
         return nom;
     }
 
-    public String getLieu() {
+    public Batiment getLieu() {
         return lieu;
     }
 

@@ -9,14 +9,14 @@ public class MoniteurB implements ListenerB {
     @Override
     public void onEvent(EmissionGaz e) {
         String res = "Moniteur B : Alerte au gaz (" + e.type + ") de niveau " + e.importance.toString();
-        res += " au bâtiment " + e.lieu + " le " + e.date;
+        res += " au bâtiment" + e.lieu + "le " + e.date;
         System.out.println(res);
         }
     
     @Override
     public void onEvent(EmissionRadiation e) {
         String res = "Moniteur B : Alerte au radiation (" + e.niveau_radiation.toString() + ") de niveau " + e.importance.toString();
-        res += " au bâtiment " + e.lieu + " le " + e.date;
+        res += " au bâtiment" + e.lieu + "le " + e.date;
         System.out.println(res);
     }
 

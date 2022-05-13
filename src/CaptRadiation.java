@@ -2,7 +2,7 @@ import java.time.*;
 
 public class CaptRadiation extends Capteur {
 
-    public CaptRadiation (Integer unId, String unNom, String unLieu) {
+    public CaptRadiation (Integer unId, String unNom, Batiment unLieu) {
         super(unId, unNom, unLieu);
     }
 

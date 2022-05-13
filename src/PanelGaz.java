@@ -5,16 +5,17 @@ import java.util.ArrayList;
 
 public class PanelGaz {
 
-    public PanelGaz (JFrame f, ArrayList<CaptGaz> liste_capteurs_gaz_IHM) {
+    public PanelGaz (JFrame f, ArrayList<CaptGaz> liste_capteurs_gaz_IHM, ArrayList<Batiment> list_bat) {
 
         JPanel selectLieu = new JPanel();
-                selectLieu.setBounds(300, 20, 250, 300);
-                JLabel question_batiment = new JLabel ("Dans quel bâtiment ?");
-                question_batiment.setBounds(0, 0, 150, 20);
+                selectLieu.setBounds(250, 20, 175, 300);
+                JLabel question_batiment = new JLabel (" Dans quel bâtiment ?  ");
+                question_batiment.setBounds(0, 0, 250, 25);
                 final DefaultListModel<String> l3 = new DefaultListModel<>();  
-                l3.addElement("Polytech");  
-                l3.addElement("Mairie");  
-                l3.addElement("Maison");   
+                for (int k = 0; k < liste_capteurs_gaz_IHM.size(); k++) {
+                    Batiment bat_nom = liste_capteurs_gaz_IHM.get(k).getLieu();
+                    l3.add(k, " "+bat_nom.getNom()+" ");
+                }  
                 final JList<String> list3 = new JList<>(l3);  
                 list3.setBounds(20,20, 100,55); 
                 JButton validLieu = new JButton("Entrer");
@@ -32,13 +33,13 @@ public class PanelGaz {
                         lieu = list3.getSelectedValue();
                         final String lieu_incendie = lieu;
                         JPanel selectImportance = new JPanel ();
-                        JLabel question_importance = new JLabel("Quel est le niveau d'importance ?");
-                        question_importance.setBounds(0, 0, 300, 20);
-                        selectImportance.setBounds(550, 20, 250, 300);
+                        JLabel question_importance = new JLabel("    Quel est le niveau d'importance ?   ");
+                        question_importance.setBounds(0, 0, 225, 20);
+                        selectImportance.setBounds(415, 20, 225, 300);
                         final DefaultListModel<String> l2 = new DefaultListModel<>();  
-                        l2.addElement("1");  
-                        l2.addElement("2");  
-                        l2.addElement("3");   
+                        l2.addElement(" 1 ");  
+                        l2.addElement(" 2 ");  
+                        l2.addElement(" 3 ");   
                         final JList<String> list2 = new JList<>(l2);  
                         list2.setBounds(600,100, 100,55); 
                         JButton validImportance = new JButton("Entrer");
@@ -52,13 +53,14 @@ public class PanelGaz {
 
                         validImportance.addActionListener(new ActionListener()  {
                             public void actionPerformed(ActionEvent e) {
-                                final String importance = list2.getSelectedValue();
+                                list2.getSelectedValue();
+                                final String importance = String.valueOf(list2.getSelectedValue().charAt(1));
                                 JPanel selectGaz = new JPanel();
-                                JLabel question_gaz = new JLabel("Quelle est le type de gaz ?");
-                                question_gaz.setBounds(0, 0, 150, 20);
-                                selectGaz.setBounds(550, 100, 300, 300);
-                                JTextField gaz = new JTextField("Entrer le type de gaz");
-                                gaz.setBounds(20, 20, 50, 20);;
+                                JLabel question_gaz = new JLabel("  Quel est le type de gaz ?");
+                                question_gaz.setBounds(0, 0, 190, 20);
+                                selectGaz.setBounds(615, 20, 190, 300);
+                                JTextField gaz = new JTextField("               ");
+                                gaz.setBounds(20, 20, 60, 20);;
                                 JButton validGaz = new JButton("Entrer");
                                 validGaz.setBounds(20, 60, 100, 20);
                                 selectGaz.add(question_gaz);
@@ -83,4 +85,5 @@ public class PanelGaz {
                     }
                 }); 
             }
+
     }

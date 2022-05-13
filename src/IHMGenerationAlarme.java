@@ -1,40 +1,44 @@
 import javax.swing.*;
+import javax.swing.plaf.LabelUI;
+
 import java.awt.event.*;
 import java.util.ArrayList;
 
 public class IHMGenerationAlarme extends JFrame{
 
-    public String reponse_alerte;
+    public ArrayList<Batiment> list_bat;
     public ArrayList<ListenerA> liste_ecouteursA_IHM;
     public ArrayList<ListenerB> liste_ecouteursB_IHM;
     public ArrayList<CaptIncendie> liste_capteurs_feu_IHM;
     public ArrayList<CaptGaz> liste_capteurs_gaz_IHM;
     public ArrayList<CaptRadiation> liste_capteurs_radiation_IHM;
 
-    public IHMGenerationAlarme(ArrayList<ListenerA> uneMonoListeA, ArrayList<ListenerB> uneMonoListeB, ArrayList<CaptIncendie> uneFeuListe, ArrayList<CaptGaz> uneGazListe, ArrayList<CaptRadiation> uneRadiationListe) {
+    public IHMGenerationAlarme(ArrayList<ListenerA> uneMonoListeA, ArrayList<ListenerB> uneMonoListeB, ArrayList<CaptIncendie> uneFeuListe, ArrayList<CaptGaz> uneGazListe, ArrayList<CaptRadiation> uneRadiationListe, ArrayList<Batiment> uneBatListe) {
+        list_bat = uneBatListe;
         liste_ecouteursA_IHM = uneMonoListeA;
         liste_ecouteursB_IHM = uneMonoListeB;
         liste_capteurs_feu_IHM = uneFeuListe;
         liste_capteurs_gaz_IHM = uneGazListe;
         liste_capteurs_radiation_IHM = uneRadiationListe;
 
+
     //Création de la liste de choix des alarmes
         final JFrame f =  new JFrame(); 
         JPanel panel1 = new JPanel();
-        panel1.setBounds(20, 20, 250, 200); 
+        panel1.setBounds(20, 20, 250, 250); 
         f.setTitle("Fenêtre de déclaration des alarmes");
         final JLabel question_alerte = new JLabel("Quelle alerte voulez vous déclarer ?");
-        question_alerte.setBounds(100, 75, 250, 25); 
+        question_alerte.setBounds(0, 0, 250, 25); 
         final JButton b = new JButton("Entrer");
-        b.setBounds(20, 160, 100, 20);  
+        b.setBounds(20, 130, 100, 20);  
         final JButton fin_de_programme = new JButton("Terminer le programme");
         fin_de_programme.setBounds(40, 200, 200, 30);
         final DefaultListModel<String> l1 = new DefaultListModel<>();  
-        l1.addElement("Alerte gaz");  
-        l1.addElement("Alerte feu");  
-        l1.addElement("Alerte radiation");   
+        l1.addElement(" Alerte gaz ");  
+        l1.addElement(" Alerte feu ");  
+        l1.addElement(" Alerte radiation ");   
         final JList<String> list1 = new JList<>(l1);  
-        list1.setBounds(20,100, 100,55);  
+        list1.setBounds(20,30, 100,55);  
 
     //Ajout de tous les ecouteurs
         for (int i = 0; i < liste_capteurs_feu_IHM.size(); i++) {
@@ -71,23 +75,23 @@ public class IHMGenerationAlarme extends JFrame{
         f.setLayout(null);  
         f.setVisible(true); 
 
-
-        b.addActionListener(new ActionListener() {  
-            public void actionPerformed(ActionEvent e) {   
+        b.addActionListener(new ActionListener() { 
+            public void actionPerformed(ActionEvent e) { 
                 String reponse_alerte = "";                       
                 reponse_alerte = list1.getSelectedValue();    
-                if (reponse_alerte == "Alerte gaz") {
-                    PanelGaz p = new PanelGaz(f, liste_capteurs_gaz_IHM);
-                }
-                else { if (reponse_alerte == "Alerte feu") {
-                    PanelIncendie p = new PanelIncendie(f, liste_capteurs_feu_IHM);  
+                if (reponse_alerte == " Alerte gaz ") {
+                    PanelGaz p = new PanelGaz(f, liste_capteurs_gaz_IHM, list_bat);
                 }
 
-                else { if (reponse_alerte == "Alerte radiation") {
-                    PanelRadiation p = new PanelRadiation(f, liste_capteurs_radiation_IHM);
+                else { if (reponse_alerte == " Alerte feu ") {
+                    PanelIncendie p = new PanelIncendie(f, liste_capteurs_feu_IHM, list_bat);
+                }
+
+                else { if (reponse_alerte == " Alerte radiation ") {
+                    PanelRadiation p = new PanelRadiation(f, liste_capteurs_radiation_IHM, list_bat);
                 }}}
             }
-        });
+        });      
 
         //Bonton pour fermer la fenêtre et terminer le programme
         fin_de_programme.addActionListener(new ActionListener() {
