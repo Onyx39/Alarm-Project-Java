@@ -19,10 +19,10 @@ public class PanelIncendie {
             Batiment bat_nom = liste_capteurs_feu_IHM.get(k).getLieu();
             l3.add(k, " "+bat_nom.getNom()+" ");
         }
-        final JList<String> list3 = new JList<>(l3);  
-        list3.setBounds(0, 42, 60,54); 
+        final JList<String> list3 = new JList<>(l3); 
+        list3.setBounds(0, 24, 65,72);
         JButton validLieu = new JButton("Entrer");
-        validLieu.setBounds(75, 76, 100, 20);
+        validLieu.setBounds(95, 76, 100, 20);
         selectLieu.add(question_batiment);
         selectLieu.add(validLieu);
         selectLieu.add(list3);
@@ -61,6 +61,7 @@ public class PanelIncendie {
                         liste_capteurs_feu_IHM.get(0).createEvent(LocalDate.now(), lieu_incendie, Integer.parseInt(importance));
                         selectImportance.removeAll();
                         selectLieu.removeAll();
+                        f.revalidate();
                         SwingUtilities.updateComponentTreeUI(f);
                     }
                 }); 

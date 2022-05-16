@@ -79,15 +79,15 @@ public class IHMGenerationAlarme extends JFrame{
                 String reponse_alerte = "";                       
                 reponse_alerte = list1.getSelectedValue();    
                 if (reponse_alerte == " Alerte gaz ") {
-                    PanelGaz p = new PanelGaz(f, liste_capteurs_gaz_IHM, list_bat);
+                    new PanelGaz(f, liste_capteurs_gaz_IHM, list_bat);
                 }
 
                 else { if (reponse_alerte == " Alerte feu ") {
-                    PanelIncendie p = new PanelIncendie(f, liste_capteurs_feu_IHM, list_bat);
+                    new PanelIncendie(f, liste_capteurs_feu_IHM, list_bat);
                 }
 
                 else { if (reponse_alerte == " Alerte radiation ") {
-                    PanelRadiation p = new PanelRadiation(f, liste_capteurs_radiation_IHM, list_bat);
+                    new PanelRadiation(f, liste_capteurs_radiation_IHM, list_bat);
                 }}}
             }
         });      

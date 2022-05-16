@@ -71,6 +71,7 @@ public class PanelGaz {
                                 selectGaz.add(validGaz);
                                 f.add(selectGaz);
                                 selectGaz.setVisible(true);
+                                f.revalidate();
                                 SwingUtilities.updateComponentTreeUI(f);
 
                                 validGaz.addActionListener(new ActionListener () {

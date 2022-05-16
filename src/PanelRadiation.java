@@ -80,6 +80,7 @@ public class PanelRadiation {
                                         selectRad.removeAll();
                                         selectImportance.removeAll();
                                         selectLieu.removeAll();
+                                        f.revalidate();
                                         SwingUtilities.updateComponentTreeUI(f);
                                     }
                                 });

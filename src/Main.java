@@ -30,6 +30,7 @@ public class Main {
         CaptIncendie ci1 = new CaptIncendie(1, "Alarme incendie1", Maison);
         CaptIncendie ci2 = new CaptIncendie(2, "Alarme incendie2", Entrepot);
         CaptIncendie ci3 = new CaptIncendie(3, "Alarme incendie3", Mairie);
+        CaptIncendie ci4 = new CaptIncendie(4, "Alarme incendie3", Usine);
         CaptRadiation cr1 = new CaptRadiation(1, "detecteur radiation1", Usine);
         CaptRadiation cr2 = new CaptRadiation(2, "detecteur radiation2", Polytech);
         CaptRadiation cr3 = new CaptRadiation(2, "detecteur radiation3", Maison);
@@ -43,11 +44,12 @@ public class Main {
         liste_capteur_feu.add(ci1);
         liste_capteur_feu.add(ci2);
         liste_capteur_feu.add(ci3);
+        liste_capteur_feu.add(ci4);
         liste_capteur_radiation.add(cr1);
         liste_capteur_radiation.add(cr2);
         liste_capteur_radiation.add(cr3);
 
-        IHMGenerationAlarme myIHM1 = new IHMGenerationAlarme(liste_mono_A, liste_mono_B, liste_capteur_feu, liste_capteur_gaz, liste_capteur_radiation, liste_bat);
+        new IHMGenerationAlarme(liste_mono_A, liste_mono_B, liste_capteur_feu, liste_capteur_gaz, liste_capteur_radiation, liste_bat);
     }
 }
 
