@@ -1,6 +1,4 @@
 import javax.swing.*;
-import javax.swing.plaf.LabelUI;
-
 import java.awt.event.*;
 import java.util.ArrayList;
 
@@ -23,22 +21,25 @@ public class IHMGenerationAlarme extends JFrame{
 
 
     //Création de la liste de choix des alarmes
-        final JFrame f =  new JFrame(); 
+        final JFrame f =  new JFrame();
+        f.setLayout(null); 
+        f.setSize(1050,250);  
         JPanel panel1 = new JPanel();
+        panel1.setLayout(null);
         panel1.setBounds(20, 20, 250, 250); 
         f.setTitle("Fenêtre de déclaration des alarmes");
         final JLabel question_alerte = new JLabel("Quelle alerte voulez vous déclarer ?");
         question_alerte.setBounds(0, 0, 250, 25); 
         final JButton b = new JButton("Entrer");
-        b.setBounds(20, 130, 100, 20);  
+        b.setBounds(115, 76, 100, 20);  
         final JButton fin_de_programme = new JButton("Terminer le programme");
-        fin_de_programme.setBounds(40, 200, 200, 30);
+        fin_de_programme.setBounds(20, 150, 200, 30);
         final DefaultListModel<String> l1 = new DefaultListModel<>();  
         l1.addElement(" Alerte gaz ");  
         l1.addElement(" Alerte feu ");  
         l1.addElement(" Alerte radiation ");   
         final JList<String> list1 = new JList<>(l1);  
-        list1.setBounds(20,30, 100,55);  
+        list1.setBounds(0,42, 100,54);  
 
     //Ajout de tous les ecouteurs
         for (int i = 0; i < liste_capteurs_feu_IHM.size(); i++) {
@@ -70,9 +71,7 @@ public class IHMGenerationAlarme extends JFrame{
         panel1.add(b);
         f.add(fin_de_programme);
         f.add(panel1);
-        panel1.setVisible(true);
-        f.setSize(1000,300); 
-        f.setLayout(null);  
+        panel1.setVisible(true); 
         f.setVisible(true); 
 
         b.addActionListener(new ActionListener() { 
