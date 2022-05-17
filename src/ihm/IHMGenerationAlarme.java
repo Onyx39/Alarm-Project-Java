@@ -83,7 +83,7 @@ public class IHMGenerationAlarme extends JFrame{
         panel1.add(b);
         f.add(fin_de_programme);
         f.add(panel1);
-        panel1.setVisible(true); 
+        panel1.setVisible(true);
         f.setVisible(true); 
 
         b.addActionListener(new ActionListener() { 

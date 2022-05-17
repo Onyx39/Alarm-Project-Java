@@ -4,12 +4,15 @@ import alarm.EmissionGaz;
 import alarm.Incendie;
 import alarm.ListenerA;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.*;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import java.util.ArrayList;
 
@@ -18,48 +21,45 @@ public class IHMMoniteurA extends JFrame implements ListenerA {
     String nom;
     ArrayList<Incendie> liste_alarme_feu;
     ArrayList<EmissionGaz> liste_alarme_gaz;
+    ArrayList<String> alarmes_deja_visualisees;
+
     JFrame f = new JFrame("Interface moniteur type A");
-  
+    JLabel nonTraitees = new JLabel("Non traitées");
     final DefaultListModel<String> l1 = new DefaultListModel<>();
     JList<String> list1 = new JList<>(l1);
 
     JButton details = new JButton("Détails");
+    JButton traitee = new JButton("Traitée");
     
 
     public IHMMoniteurA (String unNom) {
     nom = unNom;
     liste_alarme_feu = new ArrayList<Incendie>();
     liste_alarme_gaz = new ArrayList<EmissionGaz>();
+    alarmes_deja_visualisees = new ArrayList<String>();
     JLabel titre = new JLabel("Bienvenue sur le moniteur '" + nom + "' de type A");
     titre.setBounds(20, 20, 420, 30);
     f.setBounds(450, 300, 400, 320);
     f.setLayout(null);
     f.add(titre);
     f.add(details);
-    list1.setBounds(50, 50, 100, 150);
-    details.setBounds(45, 230, 100, 30);
+    f.add(nonTraitees);
+    nonTraitees.setBounds(50, 50, 100, 25);
+    list1.setBounds(50, 75, 100, 150);
+    details.setBounds(50, 245, 100, 30);
+    traitee.setBounds(170, 245, 100, 30);
+    f.add(traitee);
     f.add(list1);
     f.setVisible(true);
 
     details.addActionListener(new ActionListener() {
         public void actionPerformed (ActionEvent e){
-            JFrame p = new JFrame ("Détails de l'alarme");
+            JFrame p = new JFrame ("Détails de l'alarme (" + nom +')');
             p.setLayout(null);
             p.setBounds(0, 310, 400, 180);
             int index = list1.getSelectedIndex();
-            if (list1.getSelectedValue() == "Alerte feu") {
-                Incendie alerte_presente = liste_alarme_feu.get(index);
-                JLabel importance = new JLabel("L'importance de l'alerte est " + alerte_presente.getImportance());
-                importance.setBounds(20, 20, 300, 25);
-                JLabel lieu = new JLabel("L'incendie s'est déclaré dans le bâtiment " + alerte_presente.getLieu().getNom());
-                lieu.setBounds(20, 45, 350, 25);
-                JLabel adresse = new JLabel("Adresse : " + alerte_presente.getLieu().getAdresse());
-                adresse.setBounds(20, 70, 500, 25);
-                p.add(adresse);
-                p.add(importance);
-                p.add(lieu);
-            }
-            else {
+            alarmes_deja_visualisees.set(index, "1");
+            if (list1.getSelectedValue() == "Alerte gaz") {
                 EmissionGaz alerte_presente = liste_alarme_gaz.get(index);
                 JLabel importance = new JLabel("L'importance de l'alerte est " + alerte_presente.getImportance());
                 importance.setBounds(20, 20, 300, 25);
@@ -70,35 +70,183 @@ public class IHMMoniteurA extends JFrame implements ListenerA {
                 JLabel gaz = new JLabel("Gaz impliqué : " + alerte_presente.getType());
                 gaz.setBounds(20, 95, 150, 25);
                 p.add(gaz);
+                JButton fermer = new JButton ("Fermer");
+                fermer.setBounds(297, 110, 80, 25);
+                p.add(fermer);
                 p.add(adresse);
                 p.add(importance);
                 p.add(lieu);
-
+                p.setVisible(true);
+                traitee.addActionListener(new ActionListener() {
+                    public void actionPerformed (ActionEvent e){
+                        int index = list1.getSelectedIndex();
+                        String test = alarmes_deja_visualisees.get(index);
+                        if (test == "1") {
+                            p.dispose();
+                            liste_alarme_feu.remove(index);
+                            liste_alarme_gaz.remove(index);
+                            alarmes_deja_visualisees.remove(index);
+                            l1.remove(index);
+            
+                            f.revalidate();
+                            SwingUtilities.updateComponentTreeUI(f);
+                        }
+                        else {
+                            JFrame non = new JFrame ("Message d'erreur");
+                            JLabel erreur = new JLabel ("Vous n'avez pas traité l'erreur !", SwingConstants.CENTER);
+                            erreur.setBounds(100, 130, 100, 50);
+                            non.setSize(300, 300);
+                            non.setLocationRelativeTo(null);
+                            non.add(erreur);
+                            f.add(non);
+                            non.setVisible(true);
+                        }
+                    }
+                });
+                fermer.addActionListener(new ActionListener() {
+                    public void actionPerformed (ActionEvent h) {
+                        p.dispose();
+                        f.revalidate();
+                    }
+                });
             }
-            p.setVisible(true);
+            else {
+                Incendie alerte_presente = liste_alarme_feu.get(index);
+                JLabel importance = new JLabel("L'importance de l'alerte est " + alerte_presente.getImportance());
+                importance.setBounds(20, 20, 300, 25);
+                JLabel lieu = new JLabel("L'incendie s'est déclaré dans le bâtiment " + alerte_presente.getLieu().getNom());
+                lieu.setBounds(20, 45, 350, 25);
+                JLabel adresse = new JLabel("Adresse : " + alerte_presente.getLieu().getAdresse());
+                adresse.setBounds(20, 70, 500, 25);
+                JButton fermer = new JButton ("Fermer");
+                fermer.setBounds(297, 110, 80, 25);
+                p.add(fermer);
+                p.add(adresse);
+                p.add(importance);
+                p.add(lieu);
+                p.setVisible(true);
+                traitee.addActionListener(new ActionListener() {
+                    public void actionPerformed (ActionEvent e){
+                        int index = list1.getSelectedIndex();
+                        String test = alarmes_deja_visualisees.get(index);
+                        if (test == "1") {
+                            p.dispose();
+                            liste_alarme_feu.remove(index);
+                            liste_alarme_gaz.remove(index);
+                            alarmes_deja_visualisees.remove(index);
+                            l1.remove(index);
+            
+                            f.revalidate();
+                            SwingUtilities.updateComponentTreeUI(f);
+                        }
+                        else {
+                            JFrame non = new JFrame ("Message d'erreur");
+                            JLabel erreur = new JLabel ("Vous n'avez pas traité l'erreur !", SwingConstants.CENTER);
+                            erreur.setBounds(100, 130, 100, 50);
+                            non.setSize(300, 300);
+                            non.setLocationRelativeTo(null);
+                            non.add(erreur);
+                            f.add(non);
+                            non.setVisible(true);
+                        }
+                    }
+                });
+                fermer.addActionListener(new ActionListener() {
+                    public void actionPerformed (ActionEvent h) {
+                        p.dispose();
+                        f.revalidate();
+                    }
+                });
 
-        }    
-    });
+            }    
+        }
+        });
 
     }
 
     @Override
     public void onEvent(EmissionGaz e) {
-        l1.addElement("Alerte gaz");
-        liste_alarme_gaz.add(e);
-        liste_alarme_feu.add(null);
-        f.setVisible(true);
-        SwingUtilities.updateComponentTreeUI(f);
+        JFrame message = new JFrame ("Nouvelle alerte");
+        message.setLayout(null);
+        JLabel message_alerte1 = new JLabel("Nouvelle alerte gaz !", SwingConstants.CENTER);
+        JLabel message_alerte2 = new JLabel("'" + nom + "'", SwingConstants.CENTER);
+
+        message_alerte1.setForeground(Color.RED);
+        message_alerte1.setBackground(Color.white);
+        message_alerte1.setOpaque(true);
+        message_alerte1.setFont(new Font("Serif", Font.BOLD, 38));
+        message_alerte2.setForeground(Color.RED);
+        message_alerte2.setBackground(Color.white);
+        message_alerte2.setOpaque(true);
+        message_alerte2.setFont(new Font("Serif", Font.BOLD, 38));
+        JButton ok = new JButton ("OK");
+        ok.setBounds(500, 600, 400, 60);
+        message.setSize(1350, 730);
+        message.setLocationRelativeTo(null);
+        message_alerte1.setBounds(400, 300, 600, 200);
+        message_alerte2.setBounds(400, 100, 600, 200);
+        message.getContentPane().setBackground(Color.BLUE);
+        message.add(message_alerte1);
+        message.add(message_alerte2);
+        message.add(ok);
+        message.setVisible(true);
+        ok.addActionListener(new ActionListener () {
+            public void actionPerformed (ActionEvent actionevent) {
+                message.removeAll();
+                f.revalidate();
+                message.setVisible(false);
+                f.revalidate();
+                l1.addElement("Alerte gaz");
+                liste_alarme_gaz.add(e);
+                liste_alarme_feu.add(null);
+                alarmes_deja_visualisees.add("0");
+                f.setVisible(true);
+                SwingUtilities.updateComponentTreeUI(f);
+            }
+        });
         
     }
 
     @Override
     public void onEvent(Incendie e) {
-        l1.addElement("Alerte feu");
-        liste_alarme_feu.add(e);
-        liste_alarme_gaz.add(null);
-        f.setVisible(true);
-        SwingUtilities.updateComponentTreeUI(f);
+        JFrame message = new JFrame ("Nouvelle alerte");
+        message.setLayout(null);
+        JLabel message_alerte1 = new JLabel("Nouvelle alerte feu !", SwingConstants.CENTER);
+        JLabel message_alerte2 = new JLabel("'" + nom + "'", SwingConstants.CENTER);
+
+        message_alerte1.setForeground(Color.RED);
+        message_alerte1.setBackground(Color.white);
+        message_alerte1.setOpaque(true);
+        message_alerte1.setFont(new Font("Serif", Font.BOLD, 38));
+        message_alerte2.setForeground(Color.RED);
+        message_alerte2.setBackground(Color.white);
+        message_alerte2.setOpaque(true);
+        message_alerte2.setFont(new Font("Serif", Font.BOLD, 38));
+        JButton ok = new JButton ("OK");
+        ok.setBounds(500, 600, 400, 60);
+        message.setSize(1350, 730);
+        message.setLocationRelativeTo(null);
+        message_alerte1.setBounds(400, 300, 600, 200);
+        message_alerte2.setBounds(400, 100, 600, 200);
+        message.getContentPane().setBackground(Color.BLUE);
+        message.add(message_alerte1);
+        message.add(message_alerte2);
+        message.add(ok);
+        message.setVisible(true);
+        ok.addActionListener(new ActionListener () {
+            public void actionPerformed (ActionEvent actionevent) {
+                message.removeAll();
+                f.revalidate();
+                message.setVisible(false);
+                f.revalidate();
+                l1.addElement("Alerte incendie");
+                liste_alarme_gaz.add(null);
+                liste_alarme_feu.add(e);
+                alarmes_deja_visualisees.add("0");
+                f.setVisible(true);
+                SwingUtilities.updateComponentTreeUI(f);
+            }
+        });
     }
     
 

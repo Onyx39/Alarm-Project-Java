@@ -69,8 +69,6 @@ public class PanelIncendie {
                                 batiment_incendie = list_bat.get(j);
                             }
                         }
-                        System.out.println(lieu_incendie);
-                        System.out.println(batiment_incendie.getNom());
                         liste_capteurs_feu_IHM.get(0).createEvent(LocalDate.now(), batiment_incendie, Integer.parseInt(importance));
                         selectImportance.removeAll();
                         selectLieu.removeAll();
