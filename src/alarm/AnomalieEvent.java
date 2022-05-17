@@ -1,12 +1,13 @@
+package alarm;
 import java.time.*;
 
 public class AnomalieEvent {
 
     LocalDate date;
-    String lieu;
+    Batiment lieu;
     Integer importance;
 
-    public AnomalieEvent (LocalDate uneDate, String unLieu, Integer uneImportance) {
+    public AnomalieEvent (LocalDate uneDate, Batiment unLieu, Integer uneImportance) {
         date = uneDate;
         lieu = unLieu;
         importance = uneImportance;
@@ -19,7 +20,7 @@ public class AnomalieEvent {
         this.date = newDate;
     }
 
-    public void setLieu (String newLieu) {
+    public void setLieu (Batiment newLieu) {
         this.lieu = newLieu;
     }
 
@@ -35,13 +36,14 @@ public class AnomalieEvent {
         return this.date;
     }
 
-    public String getLieu (){
+    public Batiment getLieu (){
         return this.lieu;
     }
 
     public Integer getImportance (){
         return this.importance;
     }
+
 
 
 }

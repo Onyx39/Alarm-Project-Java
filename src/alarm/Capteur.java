@@ -1,3 +1,4 @@
+package alarm;
 import java.util.ArrayList;
 
 public class Capteur {

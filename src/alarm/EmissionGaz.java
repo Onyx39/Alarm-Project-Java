@@ -1,10 +1,11 @@
+package alarm;
 import java.time.*;
 
 public class EmissionGaz extends AnomalieEvent {
 
     String type;
 
-    public EmissionGaz(LocalDate uneDate, String unLieu, Integer uneImportance, String unType) {
+    public EmissionGaz(LocalDate uneDate, Batiment unLieu, Integer uneImportance, String unType) {
         super(uneDate, unLieu, uneImportance);
         this.type = unType;
     }

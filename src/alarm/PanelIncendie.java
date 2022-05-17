@@ -1,3 +1,4 @@
+package alarm;
 import javax.swing.*;
 import java.awt.event.*;
 import java.time.LocalDate;
@@ -17,7 +18,7 @@ public class PanelIncendie {
         final DefaultListModel<String> l3 = new DefaultListModel<>();  
         for (int k = 0; k < liste_capteurs_feu_IHM.size(); k++) {
             Batiment bat_nom = liste_capteurs_feu_IHM.get(k).getLieu();
-            l3.add(k, " "+bat_nom.getNom()+" ");
+            l3.add(k, bat_nom.getNom());
         }
         final JList<String> list3 = new JList<>(l3); 
         list3.setBounds(0, 24, 65,72);
@@ -28,6 +29,8 @@ public class PanelIncendie {
         selectLieu.add(list3);
         f.add(selectLieu);
         selectLieu.setVisible(true);
+        selectLieu.repaint();
+        f.revalidate();
         SwingUtilities.updateComponentTreeUI(f);
 
         validLieu.addActionListener(new ActionListener () {
@@ -52,13 +55,23 @@ public class PanelIncendie {
                 selectImportance.add(validImportance);
                 f.add(selectImportance);
                 selectImportance.setVisible(true);
+                selectImportance.repaint();
+                f.revalidate();
                 SwingUtilities.updateComponentTreeUI(f);
 
                 validImportance.addActionListener(new ActionListener()  {
                     public void actionPerformed(ActionEvent e) {
                         list2.getSelectedValue();
                         final String importance = String.valueOf(list2.getSelectedValue().charAt(1));
-                        liste_capteurs_feu_IHM.get(0).createEvent(LocalDate.now(), lieu_incendie, Integer.parseInt(importance));
+                        Batiment batiment_incendie = null;
+                        for (int j = 0; j < list_bat.size(); j++) {
+                            if (list_bat.get(j).getNom() == lieu_incendie) {
+                                batiment_incendie = list_bat.get(j);
+                            }
+                        }
+                        System.out.println(lieu_incendie);
+                        System.out.println(batiment_incendie.getNom());
+                        liste_capteurs_feu_IHM.get(0).createEvent(LocalDate.now(), batiment_incendie, Integer.parseInt(importance));
                         selectImportance.removeAll();
                         selectLieu.removeAll();
                         f.revalidate();

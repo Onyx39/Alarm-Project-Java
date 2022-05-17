@@ -1,3 +1,4 @@
+package alarm;
 public class Batiment {
 
     String nom, adresse;

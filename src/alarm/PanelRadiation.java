@@ -1,11 +1,12 @@
+package alarm;
 import javax.swing.*;
 import java.awt.event.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class PanelGaz {
+public class PanelRadiation {
 
-    public PanelGaz (JFrame f, ArrayList<CaptGaz> liste_capteurs_gaz_IHM, ArrayList<Batiment> list_bat) {
+    public PanelRadiation (JFrame f, ArrayList<CaptRadiation> liste_capteurs_radiation_IHM, ArrayList<Batiment> list_bat) {
 
         JPanel selectLieu = new JPanel();
         selectLieu.setLayout(null);
@@ -13,9 +14,9 @@ public class PanelGaz {
         JLabel question_batiment = new JLabel ("Dans quel bâtiment ?");
         question_batiment.setBounds(0, 0, 200, 25);
         final DefaultListModel<String> l3 = new DefaultListModel<>();  
-        for (int k = 0; k < liste_capteurs_gaz_IHM.size(); k++) {
-            Batiment bat_nom = liste_capteurs_gaz_IHM.get(k).getLieu();
-            l3.add(k, " "+bat_nom.getNom()+" ");
+        for (int k = 0; k < liste_capteurs_radiation_IHM.size(); k++) {
+            Batiment bat_nom = liste_capteurs_radiation_IHM.get(k).getLieu();
+            l3.add(k, bat_nom.getNom());
         }
         final JList<String> list3 = new JList<>(l3);  
         list3.setBounds(0, 42, 60,54); 
@@ -33,7 +34,7 @@ public class PanelGaz {
                 String lieu = "";
                 lieu = list3.getSelectedValue();
                 final String lieu_incendie = lieu;
-                JPanel selectImportance = new JPanel ();
+                JPanel selectImportance = new JPanel();
                 JLabel question_importance = new JLabel("Quel est le niveau d'importance de l'alerte ?");
                 selectImportance.setLayout(null);
                 question_importance.setBounds(0, 0, 250, 20);
@@ -57,30 +58,36 @@ public class PanelGaz {
                             public void actionPerformed(ActionEvent e) {
                                 list2.getSelectedValue();
                                 final String importance = String.valueOf(list2.getSelectedValue().charAt(1));
-                                JPanel selectGaz = new JPanel();
-                                selectGaz.setLayout(null);
-                                JLabel question_gaz = new JLabel("Quel est le type de gaz ?");
-                                question_gaz.setBounds(0, 0, 250, 20);
-                                selectGaz.setBounds(780, 20, 250, 250);
-                                JTextField gaz = new JTextField();
-                                gaz.setBounds(0, 42, 50, 20);;
-                                JButton validGaz = new JButton("Entrer");
-                                validGaz.setBounds(0, 77, 100, 20);
-                                selectGaz.add(question_gaz);
-                                selectGaz.add(gaz);
-                                selectGaz.add(validGaz);
-                                f.add(selectGaz);
-                                selectGaz.setVisible(true);
-                                f.revalidate();
+                                JPanel selectRad = new JPanel();
+                                selectRad.setLayout(null);
+                                JLabel question_rad = new JLabel("Quel est le niveau des radiations ?");
+                                question_rad.setBounds(0, 0, 250, 20);
+                                selectRad.setBounds(780, 20, 250, 250);
+                                JTextField rad = new JTextField();
+                                rad.setBounds(0, 42, 30, 20);;
+                                JButton validRad = new JButton("Entrer");
+                                validRad.setBounds(0, 77, 100, 20);
+                                selectRad.add(question_rad);
+                                selectRad.add(rad);
+                                selectRad.add(validRad);
+                                f.add(selectRad);
+                                selectRad.setVisible(true);
                                 SwingUtilities.updateComponentTreeUI(f);
 
-                                validGaz.addActionListener(new ActionListener () {
+                                validRad.addActionListener(new ActionListener () {
                                     public void actionPerformed (ActionEvent e) {
-                                        String type_gaz = gaz.getText();
-                                        liste_capteurs_gaz_IHM.get(0).createEvent(LocalDate.now(), lieu_incendie, Integer.parseInt(importance), type_gaz);
-                                        selectGaz.removeAll();
+                                        Integer niveau_radiation = Integer.parseInt(rad.getText());
+                                        Batiment batiment_incendie = null;
+                                        for (int j = 0; j < list_bat.size(); j++) {
+                                            if (list_bat.get(j).getNom() == lieu_incendie) {
+                                                batiment_incendie = list_bat.get(j);
+                                            }
+                                        }
+                                        liste_capteurs_radiation_IHM.get(0).createEvent(LocalDate.now(), batiment_incendie, Integer.parseInt(importance), niveau_radiation);
+                                        selectRad.removeAll();
                                         selectImportance.removeAll();
                                         selectLieu.removeAll();
+                                        f.revalidate();
                                         SwingUtilities.updateComponentTreeUI(f);
                                     }
                                 });
@@ -89,5 +96,4 @@ public class PanelGaz {
                     }
                 }); 
             }
-
     }

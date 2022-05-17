@@ -1,4 +1,15 @@
+package test;
 import java.util.ArrayList;
+
+import alarm.Batiment;
+import alarm.CaptGaz;
+import alarm.CaptIncendie;
+import alarm.CaptRadiation;
+import alarm.ListenerA;
+import alarm.ListenerB;
+import ihm.IHMGenerationAlarme;
+import ihm.IHMMoniteurA;
+import ihm.IHMMoniteurB;
 
 public class Main {
 
@@ -49,7 +60,12 @@ public class Main {
         liste_capteur_radiation.add(cr2);
         liste_capteur_radiation.add(cr3);
 
+        IHMMoniteurA sallepompiers = new IHMMoniteurA("Salle des pompiers");
+        liste_mono_A.add(sallepompiers);
+        IHMMoniteurB salleurgence = new IHMMoniteurB("Salle des urgences");
+        liste_mono_B.add(salleurgence);
         new IHMGenerationAlarme(liste_mono_A, liste_mono_B, liste_capteur_feu, liste_capteur_gaz, liste_capteur_radiation, liste_bat);
+        
     }
 }
 

@@ -1,3 +1,4 @@
+package alarm;
 import java.time.*;
 
 public class CaptGaz extends Capteur {
@@ -6,7 +7,7 @@ public class CaptGaz extends Capteur {
         super(unId, unNom, unLieu);
     }
 
-    public void createEvent (LocalDate uneDate, String unLieu, Integer uneImportance, String unType) {
+    public void createEvent (LocalDate uneDate, Batiment unLieu, Integer uneImportance, String unType) {
         EmissionGaz e = new EmissionGaz(uneDate, unLieu, uneImportance, unType);
         for (int i = 0; i < liste_ecouteurs_typeA.size(); i++) {
             liste_ecouteurs_typeA.get(i).onEvent(e);

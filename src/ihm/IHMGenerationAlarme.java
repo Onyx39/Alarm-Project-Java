@@ -1,4 +1,16 @@
+package ihm;
 import javax.swing.*;
+
+import alarm.Batiment;
+import alarm.CaptGaz;
+import alarm.CaptIncendie;
+import alarm.CaptRadiation;
+import alarm.ListenerA;
+import alarm.ListenerB;
+import alarm.PanelGaz;
+import alarm.PanelIncendie;
+import alarm.PanelRadiation;
+
 import java.awt.event.*;
 import java.util.ArrayList;
 
