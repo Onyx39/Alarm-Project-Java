@@ -33,7 +33,7 @@ public class IHMMoniteurB extends JFrame implements ListenerB {
         liste_alarme_gaz = new ArrayList<EmissionGaz>();
         JLabel titre = new JLabel("Bienvenue sur le moniteur '" + nom + "' de type B");
         titre.setBounds(20, 20, 420, 30);
-        f.setBounds(1000, 300, 350, 320);
+        f.setBounds(900, 300, 400, 320);
         f.setLayout(null);
         f.add(titre);
         f.add(details);
@@ -46,7 +46,7 @@ public class IHMMoniteurB extends JFrame implements ListenerB {
             public void actionPerformed (ActionEvent e){
                 JFrame p = new JFrame ("Détails de l'alarme");
                 p.setLayout(null);
-                p.setBounds(0, 500, 500, 180);
+                p.setBounds(0, 500, 400, 180);
                 int index = list1.getSelectedIndex();
                 if (list1.getSelectedValue() == "Alerte radiation") {
                     EmissionRadiation alerte_presente = liste_alarme_radiation.get(index);
