@@ -52,6 +52,23 @@ public class IHMMoniteurA extends JFrame implements ListenerA {
     f.add(list1);
     f.setVisible(true);
 
+    traitee.addActionListener(new ActionListener() {
+        public void actionPerformed (ActionEvent e){
+            int index = list1.getSelectedIndex();
+            String test = alarmes_deja_visualisees.get(index);
+            if (test == "0") {
+            JFrame non = new JFrame ("Message d'erreur");
+            JLabel erreur = new JLabel ("Vous n'avez pas traité l'erreur !", SwingConstants.CENTER);
+            non.setSize(300, 300);
+            non.setLocationRelativeTo(null);
+            non.add(erreur);
+            non.setVisible(true);
+            f.revalidate();
+            SwingUtilities.updateComponentTreeUI(f);
+            }
+        }
+    });
+
     details.addActionListener(new ActionListener() {
         public void actionPerformed (ActionEvent e){
             JFrame p = new JFrame ("Détails de l'alarme (" + nom +')');
@@ -91,16 +108,8 @@ public class IHMMoniteurA extends JFrame implements ListenerA {
                             f.revalidate();
                             SwingUtilities.updateComponentTreeUI(f);
                         }
-                        else {
-                            JFrame non = new JFrame ("Message d'erreur");
-                            JLabel erreur = new JLabel ("Vous n'avez pas traité l'erreur !", SwingConstants.CENTER);
-                            non.setSize(300, 300);
-                            non.setLocationRelativeTo(null);
-                            non.add(erreur);
-                            non.setVisible(true);
-                            f.revalidate();
-                            SwingUtilities.updateComponentTreeUI(f);
-                        }
+                        
+                        
                     }
                 });
                 fermer.addActionListener(new ActionListener() {
@@ -136,16 +145,6 @@ public class IHMMoniteurA extends JFrame implements ListenerA {
                             alarmes_deja_visualisees.remove(index);
                             l1.remove(index);
             
-                            f.revalidate();
-                            SwingUtilities.updateComponentTreeUI(f);
-                        }
-                        else {
-                            JFrame non = new JFrame ("Message d'erreur");
-                            JLabel erreur = new JLabel ("Vous n'avez pas traité l'erreur !", SwingConstants.CENTER);
-                            non.setSize(300, 300);
-                            non.setLocationRelativeTo(null);
-                            non.add(erreur);
-                            non.setVisible(true);
                             f.revalidate();
                             SwingUtilities.updateComponentTreeUI(f);
                         }

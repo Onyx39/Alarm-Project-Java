@@ -51,6 +51,23 @@ public class IHMMoniteurB extends JFrame implements ListenerB {
         f.add(traitee);
         f.add(list1);
         f.setVisible(true);
+
+        traitee.addActionListener(new ActionListener() {
+            public void actionPerformed (ActionEvent e){
+                int index = list1.getSelectedIndex();
+                String test = alarmes_deja_visualisees.get(index);
+                if (test == "0") {
+                JFrame non = new JFrame ("Message d'erreur");
+                JLabel erreur = new JLabel ("Vous n'avez pas traité l'erreur !", SwingConstants.CENTER);
+                non.setSize(300, 300);
+                non.setLocationRelativeTo(null);
+                non.add(erreur);
+                non.setVisible(true);
+                f.revalidate();
+                SwingUtilities.updateComponentTreeUI(f);
+                }
+            }
+        });
     
         details.addActionListener(new ActionListener() {
             public void actionPerformed (ActionEvent e){
@@ -88,16 +105,6 @@ public class IHMMoniteurB extends JFrame implements ListenerB {
                                 alarmes_deja_visualisees.remove(index);
                                 l1.remove(index);
                 
-                                f.revalidate();
-                                SwingUtilities.updateComponentTreeUI(f);
-                            }
-                            else {
-                                JFrame non = new JFrame ("Message d'erreur");
-                                JLabel erreur = new JLabel ("Vous n'avez pas traité l'erreur !", SwingConstants.CENTER);
-                                non.setSize(300, 300);
-                                non.setLocationRelativeTo(null);
-                                non.add(erreur);
-                                non.setVisible(true);
                                 f.revalidate();
                                 SwingUtilities.updateComponentTreeUI(f);
                             }
@@ -139,16 +146,6 @@ public class IHMMoniteurB extends JFrame implements ListenerB {
                                 alarmes_deja_visualisees.remove(index);
                                 l1.remove(index);
                 
-                                f.revalidate();
-                                SwingUtilities.updateComponentTreeUI(f);
-                            }
-                            else {
-                                JFrame non = new JFrame ("Message d'erreur");
-                                JLabel erreur = new JLabel ("Vous n'avez pas traité l'erreur !", SwingConstants.CENTER);
-                                non.setSize(300, 300);
-                                non.setLocationRelativeTo(null);
-                                non.add(erreur);
-                                non.setVisible(true);
                                 f.revalidate();
                                 SwingUtilities.updateComponentTreeUI(f);
                             }
