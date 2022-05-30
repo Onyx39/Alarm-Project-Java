@@ -84,6 +84,7 @@ public class IHMGenerationAlarme extends JFrame{
         f.add(fin_de_programme);
         f.add(panel1);
         panel1.setVisible(true);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true); 
 
         b.addActionListener(new ActionListener() { 

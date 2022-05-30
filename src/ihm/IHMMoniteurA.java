@@ -94,12 +94,12 @@ public class IHMMoniteurA extends JFrame implements ListenerA {
                         else {
                             JFrame non = new JFrame ("Message d'erreur");
                             JLabel erreur = new JLabel ("Vous n'avez pas traité l'erreur !", SwingConstants.CENTER);
-                            erreur.setBounds(100, 130, 100, 50);
                             non.setSize(300, 300);
                             non.setLocationRelativeTo(null);
                             non.add(erreur);
-                            f.add(non);
                             non.setVisible(true);
+                            f.revalidate();
+                            SwingUtilities.updateComponentTreeUI(f);
                         }
                     }
                 });
@@ -142,12 +142,12 @@ public class IHMMoniteurA extends JFrame implements ListenerA {
                         else {
                             JFrame non = new JFrame ("Message d'erreur");
                             JLabel erreur = new JLabel ("Vous n'avez pas traité l'erreur !", SwingConstants.CENTER);
-                            erreur.setBounds(100, 130, 100, 50);
                             non.setSize(300, 300);
                             non.setLocationRelativeTo(null);
                             non.add(erreur);
-                            f.add(non);
                             non.setVisible(true);
+                            f.revalidate();
+                            SwingUtilities.updateComponentTreeUI(f);
                         }
                     }
                 });
